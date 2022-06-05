@@ -1,47 +1,44 @@
-import { useState } from "react";
-import logo from "./logo.svg";
+import { useData } from "./contexts/DataContext";
 import "./App.css";
 
+const format = (date: Date): string => {
+  const pad = (number: Number) => String(number).padStart(2, "0");
+
+  return `${pad(date.getDate())} ${pad(date.getMonth() + 1)} ${
+    date.getFullYear() % 100
+  } à partir de ${pad(date.getHours())}h`;
+};
+
 function App() {
-  const [count, setCount] = useState(0);
+  const { location, date, remainingPlaceCount, gameCount } = useData();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button
-            type="button"
-            onClick={() => setCount((oldCount) => oldCount + 1)}
-          >
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+    <>
+      <header>
+        <h1>TL</h1>
+        <details>
+          <summary>?</summary>
+          <p>Lorem ipsum.</p>
+        </details>
       </header>
-    </div>
+      <main>
+        Prochaine soirée le <time dateTime={`${date}`}>{format(date)}</time> à{" "}
+        <a href={`https://www.google.fr/maps/place/${location.address}`}>
+          {location.name}
+        </a>
+      </main>
+      <footer>
+        <div>
+          {remainingPlaceCount}{" "}
+          {remainingPlaceCount > 1 ? "places restantes" : "place restante"}
+          <a href="#">je viens</a>
+        </div>
+        <div>
+          {gameCount} {gameCount > 1 ? "jeux proposés" : "jeu proposé"}
+          <a href="#">je choisis</a>
+        </div>
+      </footer>
+    </>
   );
 }
 
