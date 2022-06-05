@@ -8,8 +8,8 @@ function App() {
   return (
     <>
       <Header />
-      <Main />
-      <Footer />
+      <Main className="flex-1 sm:flex-initial sm:order-1" />
+      <Footer className="sm:flex-1" />
     </>
   );
 }

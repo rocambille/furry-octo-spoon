@@ -1,5 +1,9 @@
 import { useData } from "../contexts/DataContext";
 
+interface Props {
+  className?: string;
+}
+
 const format = (date: Date): string => {
   const pad = (number: Number) => String(number).padStart(2, "0");
 
@@ -8,11 +12,11 @@ const format = (date: Date): string => {
   } à partir de ${pad(date.getHours())}h`;
 };
 
-function Main() {
+function Main({ className = "" }: Props) {
   const { location, date } = useData();
 
   return (
-    <main>
+    <main className={className}>
       Prochaine soirée le <time dateTime={`${date}`}>{format(date)}</time> à{" "}
       <a href={`https://www.google.fr/maps/place/${location.address}`}>
         {location.name}
