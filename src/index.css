@@ -3,21 +3,49 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-      "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  a {
+    @apply underline;
   }
 
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
+  a:hover {
+    @apply no-underline;
   }
+}
 
+@layer components {
   #root {
     @apply flex flex-col h-screen;
+  }
+
+  .modal-trigger {
+    @apply list-none cursor-pointer;
+  }
+
+  .modal-trigger::-webkit-details-marker {
+    @apply hidden;
+  }
+
+  .modal[open] .modal-trigger:before {
+    @apply content-[''] fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-75;
+  }
+
+  .modal-window {
+    @apply bg-white p-4 fixed rounded-lg top-8 left-1/2 -translate-x-1/2 min-w-[280px] max-w-prose;
+  }
+
+  .modal-window::after {
+    @apply content-['🗙'] bg-red-500 text-white pointer-events-none
+          absolute -right-8 top-4 w-8 h-16
+          rounded-r-full grid place-content-center;
+  }
+}
+
+@layer utilities {
+  .text-stroke-blue-900 {
+    -webkit-text-stroke: 0.5px rgb(30 58 138);
+  }
+
+  .text-stroke-green-900 {
+    -webkit-text-stroke: 0.5px rgb(20 83 45);
   }
 }

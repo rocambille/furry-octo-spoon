@@ -6,6 +6,7 @@ interface ModalProps {
 
 interface TriggerProps {
   children: ReactNode;
+  className?: string;
 }
 
 interface WindowProps {
@@ -26,7 +27,7 @@ function Modal({ children }: ModalProps) {
 
   return (
     <details
-      className="modal group"
+      className="modal"
       onToggle={(event) => {
         const details = event.target as HTMLDetailsElement;
 
@@ -49,8 +50,8 @@ function Modal({ children }: ModalProps) {
   );
 }
 
-function Trigger({ children }: TriggerProps) {
-  return <summary className="modal-trigger">{children}</summary>;
+function Trigger({ children, className = "" }: TriggerProps) {
+  return <summary className={`modal-trigger ${className}`}>{children}</summary>;
 }
 
 Modal.Trigger = Trigger;
