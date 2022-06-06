@@ -9,10 +9,10 @@ const format = (date: Date) => {
 
   return (
     <time className="my-4" dateTime={`${date}`}>
-      <span className="block sm:inline text-red-600 text-5xl">
+      <span className="block sm:inline text-red-500 text-5xl">
         {pad(date.getDate())}
       </span>
-      <span className="block sm:inline text-red-600 text-5xl sm:before:content-['/']">
+      <span className="block sm:inline text-red-500 text-5xl sm:before:content-['/']">
         {pad(date.getMonth() + 1)}
       </span>
       <span className="block sm:inline text-5xl mb-4 sm:before:content-['/']">
