@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import { useData } from "../contexts/DataContext";
+import type { ReactNode } from "react";
 
 interface CTAProps {
   children: ReactNode;

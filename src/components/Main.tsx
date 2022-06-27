@@ -4,21 +4,56 @@ interface Props {
   className?: string;
 }
 
+const days = [
+  "dimanche",
+  "lundi",
+  "mardi",
+  "mercredi",
+  "jeudi",
+  "vendredi",
+  "samedi",
+];
+
+const months = [
+  "janvier",
+  "février",
+  "mars",
+  "avril",
+  "mai",
+  "juin",
+  "juillet",
+  "août",
+  "septembre",
+  "octobre",
+  "novembre",
+  "décembre",
+];
+
 const format = (date: Date) => {
   const pad = (number: Number) => String(number).padStart(2, "0");
 
   return (
-    <time className="my-4" dateTime={`${date}`}>
-      <span className="block sm:inline text-red-500 text-5xl">
-        {pad(date.getDate())}
+    <time
+      className="my-4 grid grid-cols-3 items-center sm:inline"
+      dateTime={`${date}`}
+    >
+      <span className="mr-2 text-right sm:hidden text-red-500">
+        {days[date.getDay()]}
       </span>
-      <span className="block sm:inline text-red-500 text-5xl sm:before:content-['/']">
+      <span className="block sm:inline text-5xl">{pad(date.getDate())}</span>
+      <span className="block sm:inline col-start-2 text-5xl sm:before:content-['/']">
         {pad(date.getMonth() + 1)}
       </span>
-      <span className="block sm:inline text-5xl mb-4 sm:before:content-['/']">
+      <span className="ml-2 text-left sm:hidden text-red-500">
+        {months[date.getMonth()]}
+      </span>
+      <span className="block sm:inline col-start-2 text-5xl mb-4 sm:before:content-['/']">
         {pad(date.getFullYear() % 100)}
-      </span>{" "}
-      à partir de {pad(date.getHours())}h
+      </span>
+      <span className="row-start-4 col-span-full">
+        {" "}
+        à partir de {pad(date.getHours())}h
+      </span>
     </time>
   );
 };

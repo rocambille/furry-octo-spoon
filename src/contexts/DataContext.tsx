@@ -1,4 +1,6 @@
-import { createContext, useContext, ReactNode } from "react";
+import type { ReactNode } from "react";
+import { createContext, useContext } from "react";
+import { useCSV, useUrls } from "../services";
 
 interface Value {
   location: {
@@ -25,23 +27,12 @@ const dataContext: React.Context<Value> = createContext({
 });
 
 export function DataProvider({ children }: Props) {
+  const { dataUrl } = useUrls();
+  const data = useCSV(dataUrl);
+
   const { Provider } = dataContext;
 
-  return (
-    <Provider
-      value={{
-        location: {
-          name: "QL",
-          address: "6 Rue de Saint-Brice, 51100 Reims",
-        },
-        date: new Date("1970-01-01T18:00"),
-        gameCount: 0,
-        remainingPlaceCount: 0,
-      }}
-    >
-      {children}
-    </Provider>
-  );
+  return <Provider value={data}>{children}</Provider>;
 }
 
 export const useData = () => useContext(dataContext);
